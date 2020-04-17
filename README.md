@@ -8,4 +8,4 @@ For some guide on using it:
 2. Click on any place within the whole area, then the moon and the cloud will gradually fade away while the temperature being showed.
 
 Thank you for reading this:)
-Jacob
+ from Jacob
