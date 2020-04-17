@@ -1,2 +1,4 @@
 # Weather-Box
-This is a practice of weather box with some animations in it and it is coded with both HTML and CSS.
+This is a practice of front-end coding.
+The main part of this work is a weather box with some animations in it.
+It is coded with HTML and CSS.
