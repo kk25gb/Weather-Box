@@ -1,0 +1,232 @@
+$color_white: #f3f3f3
+$color_yellow: #FFD633
+$color_black: #222
+$color_blue_start: #19283D
+$color_blue_end: #1D678F
+$color_rain: #4DACFF
+$color_white_cloud: #f2f9fe
+$color_grey_cloud: #ccc
+
+@mixin size($w,$h)
+  width: $w
+  height: $h
+  
+html, body
+  width: 100%
+  height: 100%
+  margin: 0px
+  padding: 0px
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: $color_black
+
+*
+  // border: 2px solid
+  position: relative //快捷鍵"por"+tab 針對上層元素做定位
+  font-family: 微軟正黑體, 'Hind Vadodara', 'sans-serif'
+
+label
+  cursor: pointer  
+  
+.daybox
+  width: 50%
+  max-width: 400px
+  background-color: $color_white
+  border-radius: 10px
+  box-shadow: 0px 0px 20px rgba(black, 0.3)
+  cursor: pointer
+  
+  &:hover
+    .bottom
+      height: 100px
+    .dayweather
+      opacity: 1
+  
+.rain
+  +size(2px, 10px)
+  left: 45px
+  bottom: 15px
+  position: absolute
+  animation: raindrop 1s infinite linear
+  background-color: $color_white
+.rain2
+  +size(2px, 13px)
+  left: 20px
+  bottom: 15px
+  animation-delay: -0.4s
+.rain3
+  +size(2px, 11px)
+  left: 70px
+  bottom: 15px
+  animation-delay: -0.7s
+@keyframes raindrop
+  0%
+    transform: translateY(0px)
+  100%
+    transform: translateY(50px)
+    opacity: 0
+  
+.top
+  height: 330px
+  background: linear-gradient(20deg, $color_blue_start, $color_blue_end)
+  background-size: 100% 300%
+  border-radius: 10px 10px 0px 0px
+  animation: daylight 20s both
+  @keyframes daylight
+    0%
+      background-position: 100% 30%
+    100%
+      background-position: 100% 100%
+  .temsvg
+    width: 100%
+    circle
+      fill: $color_white_cloud
+      opacity: 0.2
+    polyline
+      stroke: $color_white_cloud
+      stroke-width: 1px
+      fill: none
+      opacity: 0.2
+    text
+      transform: translateX(-5px) translateY(15px)
+      font-size: 10px
+      fill: $color_white_cloud
+      opacity: 0
+  
+  .moon
+    +size(50px,50px)
+    position: absolute
+    left: 50px
+    top: 100px
+    border-radius: 100%
+    box-shadow: 15px -15px
+    animation: moonmove 20s infinite
+    
+  @keyframes moonmove
+    0%
+      box-shadow: 15px -15px $color_yellow
+      transform: translateX(-15px) translateY(15px)
+    100% /*不是很懂*/
+      box-shadow: -30px 30px $color_yellow
+      transform: translateX(30px) translateY(-30px)
+    //陰影跟本體的移動會相抵銷 變成本體移動
+  
+.cloud
+    +size(100px, 36px)
+    position: absolute
+    left: 240px
+    bottom: 50px
+    border-radius: 20px
+    animation: clouddrift 5s infinite
+    background-color: $color_white_cloud
+    box-shadow: 0px 0px 20px rgba(black, 0.3)
+    &:before,&:after 
+      // border: 1px solid
+      background-color: $color_white_cloud
+      position: absolute
+      content: ""
+      display: block
+      +size(50px,50px)
+      border-radius: 100%
+    &:before
+      left: 16px
+      top: -28px 
+    &:after
+      left: 35px
+      top: -20px 
+@keyframes clouddrift
+  0%
+    transform: translateY(0px)
+  50%
+    transform: translateY(-10px)
+  100%
+    transform: translateY(0px)
+    
+    
+    
+.bottom
+  height: 10px
+  display: flex
+  justify-content: center
+  box-shadow: 0px 0px 20px rgba(black, 0.3)
+  overflow: hidden
+  transition-duration: 1s
+  
+  .dayweather
+    width: calc(100% / 7 - 5px)
+    display: inline-block
+    text-align: center
+    opacity: 0
+    transition: 0.5s
+    transition-delay: 0.5s
+    h3
+      font-size: 8px
+      color: rgba($color_black, 0.7)
+      font-weight: 400 
+      letter-spacing: 1px
+    
+    svg
+      width: 100%
+      max-width: 40px
+      height: 30px
+      .sun
+        fill: $color_yellow
+        stroke: rgba($color_yellow, 0.9)
+        stroke-width: 20px
+        stroke-dasharray: 5px
+    
+      line
+        stroke: $color_rain
+        stroke-width: 2px
+        
+      .cloud
+        fill: $color_grey_cloud
+        
+.dayweather:nth-child(1)
+  transition-delay: 0.2s
+.dayweather:nth-child(2)
+  transition-delay: 0.4s
+.dayweather:nth-child(3)
+  transition-delay: 0.6s
+.dayweather:nth-child(4)
+  transition-delay: 0.8s
+.dayweather:nth-child(5)
+  transition-delay: 1s
+.dayweather:nth-child(6)
+  transition-delay: 1.2s
+.dayweather:nth-child(7)
+  transition-delay: 1.4s
+  
+.text_area
+  display: inline-block
+  position: absolute
+  bottom: 25px
+  left: 25px
+  color: $color_white
+  
+  .temperature
+    font-size: 75px
+    line-height: 80px
+  .infos
+    font-size: 13px
+    opacity: 0.6
+    
+// 切換溫度線圖svg和月亮跟雲
+#switch_night
+  display: none
+.moon, .cloud
+  transition: 1s
+.temsvg
+  circle, polyline, text
+    transition: 1s
+  text
+    transition: 1s 0.6s
+  polyline
+    transition: 1s 0.3s
+#switch_night:checked+.top
+  .moon, .cloud
+    opacity: 0.2
+  .temsvg
+    circle, polyline, text
+      opacity: 1
